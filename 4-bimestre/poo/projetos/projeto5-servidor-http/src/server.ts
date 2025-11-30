@@ -1,24 +1,17 @@
-import http from "http";
-import dotenv from "dotenv";
+import * as http from "http";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-const nome = "Seu Nome";
-const idade = 20;
-
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end(`Servidor rodando para ${nome}, idade ${idade}!`);
-});
+const server = http.createServer(
+  (req: http.IncomingMessage, res: http.ServerResponse) => {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Servidor funcionando!");
+  }
+);
 
 server.listen(PORT, () => {
-  console.log(`Servidor funcionando em http://localhost:${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
-
-server.close(() => {
-  console.log("Servidor encerrado.");
-});
-
-export default server;
